@@ -40,7 +40,7 @@ Analizador de logs
 
 %description -l pl
 Pakiet zawiera logcheck - aplikacjê przeznaczon± do automatycznego
-analizowania logów systemowych i przesy³aniu ich po wstêpnjej obróbce
+analizowania logów systemowych i przesy³aniu ich po wstêpnej obróbce
 poczt± elektroniczn± do administratora systemu. Aplikacja ta jest
 klonem skryptu frequentcheck.sh z Trusted Information Systems
 Gauntlet(tm).
