@@ -1,3 +1,5 @@
+# TODO:
+# - SECURITY: http://securitytracker.com/alerts/2004/Apr/1009838.html
 Summary:	Logcheck system log analyzer
 Summary(es):	Analizador de logs
 Summary(pl):	Logcheck - analizator logów systemu
