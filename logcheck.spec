@@ -39,7 +39,7 @@ Gauntlet(tm).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},etc/cron.hourly,%{_sbindir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.hourly,%{_sbindir}}
 
 %{__make} linux \
 	CC=%{__cc} \
