@@ -3,7 +3,7 @@ Summary(pl):	Logcheck - analizator logów systemu
 Name:		logcheck
 Version:	1.1.1
 Release:	1
-License:	Free. See LICENSE file.
+License:	Free (see LICENSE)
 Group:		Applications/System
 Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pld.patch
