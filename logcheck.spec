@@ -60,21 +60,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(700,root,root) %config(missingok) /etc/cron.hourly/logcheck
 %attr(700,root,root) /usr/sbin/logcheck
 %attr(700,root,root) /usr/sbin/logtail
-
-%changelog
-
-* Sat Sep 12 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-[1.1-1d]
-- build against glibc-2.1,
-- translation modified for pl,
-- added %defattr support,
-- minor spec's modifications.
-
-* Sun Jul 13 1998 Peter Soos <sp@osb.hu>
-
-- Some modification in handling of tmp files
-- Corrected the permission of document directory
-
-* Wed Jul 1 1998 Peter Soos <sp@osb.hu>
-
-- Initial package
