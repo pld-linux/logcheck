@@ -7,7 +7,7 @@ Summary(uk):	Logcheck - 廖撂猎弦 log-屏侍ψ
 Summary(zh_CN):	系统日志分析工具
 Name:		logcheck
 Version:	1.1.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
