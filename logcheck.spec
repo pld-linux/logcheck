@@ -36,7 +36,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{/etc/logcheck,%{_sbindir}}
 
-make CC="gcc" CFLAGS="$RPM_OPT_FLAGS" linux
+%{__make} CC="gcc" CFLAGS="$RPM_OPT_FLAGS" linux
 
 install -d $RPM_BUILD_ROOT/etc/cron.hourly
 
