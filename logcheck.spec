@@ -5,8 +5,6 @@ Version:	1.1.1
 Release:	1
 License:	Free. See LICENSE file.
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pld.patch
 Vendor:		Craig Rowland <crowland@psionic.com>
