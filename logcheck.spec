@@ -1,9 +1,14 @@
 Summary:	Logcheck system log analyzer
+Summary(es):	Analizador de logs
 Summary(pl):	Logcheck - analizator logСw systemu
+Summary(pt_BR):	Um analisador de logs
+Summary(ru):	Logcheck - анализатор log-файлов
+Summary(uk):	Logcheck - анал╕затор log-файл╕в
+Summary(zh_CN):	о╣мЁхуж╬╥жнЖ╧╓╬ъ
 Name:		logcheck
 Version:	1.1.1
 Release:	1
-License:	Free (see LICENSE)
+License:	GPL
 Group:		Applications/System
 Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pld.patch
@@ -25,12 +30,27 @@ problems. This package is a clone of the frequentcheck.sh script from
 the Trusted Information Systems Gauntlet(tm) firewall package. TIS has
 granted permission for me to clone this package.
 
+%description -l es
+Analizador de logs
+
 %description -l pl
 Pakiet zawiera logcheck - aplikacjЙ przeznaczon╠ do automatycznego
 analizowania logСw systemowych i przesyЁaniu ich po wstЙpnjej obrСbce
 poczt╠ elektroniczn╠ do administratora systemu. Aplikacja ta jest
 klonem skryptu frequentcheck.sh z Trusted Information Systems
 Gauntlet(tm).
+
+%description -l pt_BR
+O logcheck И um software que foi desenvolvido para automaticamente rodar e
+checar logs do sistema para violaГУes de seguranГa, e atividade nЦo usual.
+
+%description -l ru
+Logcheck - программа для отслеживания в системных логах необычных действий
+и попыток несанкционированного доступа.
+
+%description -l uk
+Logcheck - програма для в╕дсл╕дковування в системних логах незвичайних д╕й
+та спроб несанкц╕онованого доступу.
 
 %prep
 %setup -q
@@ -49,14 +69,12 @@ cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
 exec %{_sbindir}/logcheck
 EOF
 
-gzip -9nf CHANGES CREDITS README* systems/linux/README*
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz systems/linux/*.gz
+%doc CHANGES CREDITS README* systems/linux/README*
 %attr(700,root,root) %dir %{_sysconfdir}
 %attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
 %attr(700,root,root) %config(missingok) /etc/cron.hourly/logcheck
