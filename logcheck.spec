@@ -1,15 +1,15 @@
-Summary:     Logcheck system log analyzer
-Name:        logcheck
-Version:     1.1
-Release:     1d
-Copyright:   Free. See LICENSE file.
-Group:       Utilities/System
-Source:      http://www.psionic.com/abacus/%{name}-%{version}.tar.gz
-Patch:       %{name}-pld.patch
-Vendor:      Craig Rowland <crowland@psionic.com>
-URL:         http://www.psionic.com/abacus
-BuildRoot:   /tmp/%{name}-%{version}-%{release}-root
-Summary(pl): Logcheck - analizator logów systemu
+Summary:	Logcheck system log analyzer
+Summary(pl):	Logcheck - analizator logów systemu
+Name:		logcheck
+Version:	1.1
+Release:	2
+Copyright:	Free. See LICENSE file.
+Group:		Utilities/System
+Source:		http://www.psionic.com/abacus/%{name}-%{version}.tar.gz
+Patch:		%{name}-pld.patch
+Vendor:		Craig Rowland <crowland@psionic.com>
+URL:		http://www.psionic.com/abacus
+BuildRoot:	/tmp/%{name}-%{version}-%{release}-root
 
 %description
 Logcheck is software package that is designed to automatically run and check
@@ -34,29 +34,29 @@ Trusted Information Systems Gauntlet(tm).
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/logcheck
-install -d $RPM_BUILD_ROOT/usr/sbin
+install -d $RPM_BUILD_ROOT{/etc/logcheck,%{_sbindir}}
 
 make CC="gcc" CFLAGS="$RPM_OPT_FLAGS" linux
 
 install -d $RPM_BUILD_ROOT/etc/cron.hourly
 
 cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
-#!/bin/bash
-/usr/sbin/logcheck
+#!/bin/sh
+%{_sbindir}/logcheck
 EOF
 
-strip $RPM_BUILD_ROOT/usr/sbin/logtail
+strip --strip-unneeded $RPM_BUILD_ROOT%{_sbindir}/logtail
+
+gzip -9nf CHANGES CREDITS README* systems/linux/README*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS README* systems/linux/README*
-
+%doc {CHANGES,CREDITS,README*,systems/linux/README*}.gz
 %attr(700,root,root) %dir /etc/logcheck
 %attr(600,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logcheck/*
 %attr(700,root,root) %config(missingok) /etc/cron.hourly/logcheck
-%attr(700,root,root) /usr/sbin/logcheck
-%attr(700,root,root) /usr/sbin/logtail
+%attr(700,root,root) %{_sbindir}/logcheck
+%attr(700,root,root) %{_sbindir}/logtail
