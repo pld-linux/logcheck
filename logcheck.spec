@@ -10,11 +10,13 @@ Version:	1.1.1
 Release:	2
 License:	GPL
 Group:		Applications/System
-Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
+#Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
+# Adopted by Debian ? They have 1.3.14 in pool
+Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	e97c2f096e219e20310c1b80e9e1bc29
 Patch0:		%{name}-pld.patch
-Vendor:		Craig Rowland <crowland@psionic.com>
-URL:		http://www.psionic.com/abacus
+Vendor:		Craig H. Rowland <crowland@psionic.com>
+#URL:		http://www.psionic.com/abacus
 Requires:	/usr/sbin/sendmail
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
