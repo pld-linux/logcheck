@@ -42,7 +42,7 @@ install -d $RPM_BUILD_ROOT/etc/cron.hourly
 
 cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
 #!/bin/sh
-%{_sbindir}/logcheck
+exec %{_sbindir}/logcheck
 EOF
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_sbindir}/logtail
