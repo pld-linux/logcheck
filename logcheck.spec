@@ -11,6 +11,7 @@ Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pld.patch
 Vendor:		Craig Rowland <crowland@psionic.com>
 URL:		http://www.psionic.com/abacus
+Requires:	/usr/sbin/sendmail
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/logcheck
