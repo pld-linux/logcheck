@@ -18,8 +18,8 @@ Patch0:		%{name}-pld.patch
 Vendor:		Craig H. Rowland <crowland@psionic.com>
 #URL:		http://www.psionic.com/abacus
 Requires:	/usr/sbin/sendmail
+Requires:	crondaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 %define		_sysconfdir	/etc/logcheck
 
 %description
