@@ -9,7 +9,7 @@ Source:		http://www.psionic.com/abacus/%{name}-%{version}.tar.gz
 Patch:		%{name}-pld.patch
 Vendor:		Craig Rowland <crowland@psionic.com>
 URL:		http://www.psionic.com/abacus
-BuildRoot:	/tmp/%{name}-%{version}-%{release}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Logcheck is software package that is designed to automatically run and check
