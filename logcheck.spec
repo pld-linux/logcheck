@@ -43,7 +43,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.hourly,%{_sbindir}}
 
 %{__make} linux \
 	CC=%{__cc} \
-	CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
+	CFLAGS="%{rpmcflags}"
 
 cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
 #!/bin/sh
