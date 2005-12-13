@@ -50,16 +50,17 @@ klonem skryptu frequentcheck.sh z Trusted Information Systems
 Gauntlet(tm).
 
 %description -l pt_BR
-O logcheck И um software que foi desenvolvido para automaticamente rodar e
-checar logs do sistema para violaГУes de seguranГa, e atividade nЦo usual.
+O logcheck И um software que foi desenvolvido para automaticamente
+rodar e checar logs do sistema para violaГУes de seguranГa, e
+atividade nЦo usual.
 
 %description -l ru
-Logcheck - программа для отслеживания в системных логах необычных действий
-и попыток несанкционированного доступа.
+Logcheck - программа для отслеживания в системных логах необычных
+действий и попыток несанкционированного доступа.
 
 %description -l uk
-Logcheck - програма для в╕дсл╕дковування в системних логах незвичайних д╕й
-та спроб несанкц╕онованого доступу.
+Logcheck - програма для в╕дсл╕дковування в системних логах незвичайних
+д╕й та спроб несанкц╕онованого доступу.
 
 %package -n logtail
 Summary:	logtail program from logcheck package
@@ -94,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES CREDITS README* systems/linux/README*
 %attr(700,root,root) %dir %{_sysconfdir}
-%attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 %attr(700,root,root) %config(missingok) /etc/cron.hourly/logcheck
 %attr(755,root,root) %{_sbindir}/logcheck
 
