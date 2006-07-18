@@ -1,103 +1,125 @@
-# TODO:
-# - SECURITY: http://securitytracker.com/alerts/2004/Apr/1009838.html
-Summary:	Logcheck system log analyzer
-Summary(es):	Analizador de logs
-Summary(pl):	Logcheck - analizator logСw systemu
-Summary(pt_BR):	Um analisador de logs
-Summary(ru):	Logcheck - анализатор log-файлов
-Summary(uk):	Logcheck - анал╕затор log-файл╕в
-Summary(zh_CN):	о╣мЁхуж╬╥жнЖ╧╓╬ъ
+Summary:	Mails anomalies in the system logfiles to the administrator
 Name:		logcheck
-Version:	1.1.1
-Release:	3.2
+Version:	1.2.46
+Release:	0.1
 License:	GPL
 Group:		Applications/System
-#Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
-# Adopted by Debian ? They have 1.3.14 in pool
-# Debian has 1.2.32 now.
-Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	e97c2f096e219e20310c1b80e9e1bc29
+Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
+# Source0-md5:	4fc24888f538d9e0592f3e4605ba3b99
 Patch0:		%{name}-pld.patch
-#URL:		http://www.psionic.com/abacus
+Source1:	%{name}.cron
+URL:		http://logcheck.alioth.debian.org/
+BuildRequires:	rpmbuild(macros) >= 1.202
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
+Requires(pre):	/bin/id
+Requires(pre):	/usr/bin/getgid
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
+Requires:	%{name}-database = %{version}-%{release}
 Requires:	/usr/sbin/sendmail
 Requires:	crondaemon
-Requires:	logtail = %{epoch}:%{version}-%{release}
+Requires:	logtail = %{version}-%{release}
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/logcheck
 
 %description
-Logcheck is software package that is designed to automatically run and
-check system log files for security violations and unusual activity.
-Logcheck utilizes a program called logtail that remembers the last
-position it read from in a log file and uses this position on
-subsequent runs to process new information. All source code is
-available for review and the implementation was kept simple to avoid
-problems. This package is a clone of the frequentcheck.sh script from
-the Trusted Information Systems Gauntlet(tm) firewall package. TIS has
-granted permission for me to clone this package.
+Logcheck is a simple utility which is designed to allow a system
+administrator to view the logfiles which are produced upon hosts under
+their control.
 
-%description -l es
-Analizador de logs
+It does this by mailing summaries of the logfiles to them, after first
+filtering out "normal" entries.
 
-%description -l pl
-Pakiet zawiera logcheck - aplikacjЙ przeznaczon╠ do automatycznego
-analizowania logСw systemowych i przesyЁaniu ich po wstЙpnej obrСbce
-poczt╠ elektroniczn╠ do administratora systemu. Aplikacja ta jest
-klonem skryptu frequentcheck.sh z Trusted Information Systems
-Gauntlet(tm).
+Normal entries are entries which match one of the many included
+regular expression files contain in the database.
 
-%description -l pt_BR
-O logcheck И um software que foi desenvolvido para automaticamente
-rodar e checar logs do sistema para violaГУes de seguranГa, e
-atividade nЦo usual.
+Logcheck was part of the Abacus Project of security tools, but this
+version has been rewritten.
 
-%description -l ru
-Logcheck - программа для отслеживания в системных логах необычных
-действий и попыток несанкционированного доступа.
+%package database
+Summary:	database of system log rules for the use of log checkers
+Group:		Applications/System
 
-%description -l uk
-Logcheck - програма для в╕дсл╕дковування в системних логах незвичайних
-д╕й та спроб несанкц╕онованого доступу.
+%description database
+This database is part of the Logcheck package, but might be used by
+others. It brings a database of regular expressions for matching
+system log entries after various criteria.
 
 %package -n logtail
-Summary:	logtail program from logcheck package
+Summary:	Print log file lines that have not been read
 Group:		Applications/System
 
 %description -n logtail
-This package contains logtail that remembers the last position it read
-from in a log file and uses this position on subsequent runs to
-process new information.
+This program will read in a standard text file and create an offset
+marker when it reads the end. The offset marker is read the next time
+logtail is run and the text file pointer is moved to the offset
+location. This allows logtail to read in the next lines of data
+following the marker. This is good for marking log files for automatic
+log file checkers to monitor system events.
+
+This program is mainly used by logcheck, because it returns only parts
+of the system logfiles that have not already been checked.
 
 %prep
 %setup -q
-%patch -p1
+#%patch0 -p1 # TODO
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.hourly,%{_sbindir},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.d,%{_sbindir},%{_bindir}}
 
-%{__make} linux \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}"
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
-#!/bin/sh
-exec %{_sbindir}/logcheck
-EOF
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.d/%{name}
 
 mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail
+touch $RPM_BUILD_ROOT%{_sysconfdir}/header.txt # TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%pre
+%groupadd -g 173 %{name}
+%useradd -u 173 -d /var/lib/%{name} -g adm -c "Logcheck User" %{name}
+
+%postun
+if [ "$1" = "0" ]; then
+	%userremove %{name}
+	%groupremove %{name}
+fi
+
 %files
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS README* systems/linux/README*
-%attr(700,root,root) %dir %{_sysconfdir}
-%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
-%attr(700,root,root) %config(missingok) /etc/cron.hourly/logcheck
+%doc AUTHORS CHANGES CREDITS TODO
+%doc docs/README.{how.to.interpret,keywords,logcheck,Maintainer} docs/tools/log-summary-ssh
+%attr(710,root,logcheck) %dir %{_sysconfdir}
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/cracking.d
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/cracking.ignore.d
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/violations.d
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/violations.ignore.d
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/ignore.d.workstation
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/ignore.d.server
+%dir %attr(2750,root,logcheck) %{_sysconfdir}/ignore.d.paranoid
+%attr(640,root,logcheck) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/logcheck.conf
+%attr(640,root,logcheck) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/logcheck.logfiles
+%attr(640,root,logcheck) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/header.txt
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/%{name}
 %attr(755,root,root) %{_sbindir}/logcheck
+%dir %attr(750,logcheck,root) /var/lib/logcheck
+%dir %attr(755,logcheck,logcheck) /var/lock/logcheck
+
+%files database
+%defattr(644,root,root,755)
+%config %verify(not md5 mtime size) %{_sysconfdir}/cracking.d/*
+%config %verify(not md5 mtime size) %{_sysconfdir}/violations.d/*
+%config %verify(not md5 mtime size) %{_sysconfdir}/violations.ignore.d/*
+%config %verify(not md5 mtime size) %{_sysconfdir}/ignore.d.workstation/*
+%config %verify(not md5 mtime size) %{_sysconfdir}/ignore.d.server/*
+%config %verify(not md5 mtime size) %{_sysconfdir}/ignore.d.paranoid/*
 
 %files -n logtail
 %defattr(644,root,root,755)
