@@ -1,7 +1,7 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
 Name:		logcheck
 Version:	1.2.46
-Release:	0.1
+Release:	0.7
 License:	GPL
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
@@ -19,6 +19,7 @@ Requires(pre):	/usr/sbin/useradd
 Requires:	%{name}-database = %{version}-%{release}
 Requires:	/usr/sbin/sendmail
 Requires:	crondaemon
+Requires:	lockfile-progs
 Requires:	logtail = %{version}-%{release}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -65,7 +66,7 @@ of the system logfiles that have not already been checked.
 
 %prep
 %setup -q
-#%patch0 -p1 # TODO
+%patch0 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -77,14 +78,19 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.d,%{_sbindir},%{_bindir}}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.d/%{name}
 
 mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail
-touch $RPM_BUILD_ROOT%{_sysconfdir}/header.txt # TODO
+
+cat <<'EOF'> $RPM_BUILD_ROOT%{_sysconfdir}/header.txt
+This email is sent by logcheck. If you wish to no-longer receive it,
+you can either deinstall the logcheck package or modify its
+configuration file (/etc/logcheck/logcheck.conf).
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %pre
 %groupadd -g 173 %{name}
-%useradd -u 173 -d /var/lib/%{name} -g adm -c "Logcheck User" %{name}
+%useradd -u 173 -d /var/lib/%{name} -g logcheck -c "Logcheck User" %{name}
 
 %postun
 if [ "$1" = "0" ]; then
@@ -109,8 +115,8 @@ fi
 %attr(640,root,logcheck) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/header.txt
 %attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/%{name}
 %attr(755,root,root) %{_sbindir}/logcheck
-%dir %attr(750,logcheck,root) /var/lib/logcheck
-%dir %attr(755,logcheck,logcheck) /var/lock/logcheck
+%dir %attr(770,root,logcheck) /var/lib/logcheck
+%dir %attr(770,root,logcheck) /var/lock/logcheck
 
 %files database
 %defattr(644,root,root,755)
