@@ -1,6 +1,5 @@
 # TODO:
 # - SECURITY: http://securitytracker.com/alerts/2004/Apr/1009838.html
-# - put logtail to bin instead of sbin?
 Summary:	Logcheck system log analyzer
 Summary(es):	Analizador de logs
 Summary(pl):	Logcheck - analizator log體 systemu
@@ -10,7 +9,7 @@ Summary(uk):	Logcheck - 廖撂猎弦 log-屏侍ψ
 Summary(zh_CN):	系统日志分析工具
 Name:		logcheck
 Version:	1.1.1
-Release:	3.1
+Release:	3.2
 License:	GPL
 Group:		Applications/System
 #Source0:	http://www.psionic.com/tools/%{name}-%{version}.tar.gz
@@ -19,7 +18,6 @@ Group:		Applications/System
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	e97c2f096e219e20310c1b80e9e1bc29
 Patch0:		%{name}-pld.patch
-Vendor:		Craig H. Rowland <crowland@psionic.com>
 #URL:		http://www.psionic.com/abacus
 Requires:	/usr/sbin/sendmail
 Requires:	crondaemon
@@ -77,7 +75,7 @@ process new information.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.hourly,%{_sbindir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.hourly,%{_sbindir},%{_bindir}}
 
 %{__make} linux \
 	CC="%{__cc}" \
@@ -87,6 +85,8 @@ cat <<EOF > $RPM_BUILD_ROOT/etc/cron.hourly/logcheck
 #!/bin/sh
 exec %{_sbindir}/logcheck
 EOF
+
+mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -101,4 +101,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n logtail
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sbindir}/logtail
+%attr(755,root,root) %{_bindir}/logtail
