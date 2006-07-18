@@ -17,10 +17,12 @@ Requires(pre):	/usr/bin/getgid
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	%{name}-database = %{version}-%{release}
-Requires:	/usr/sbin/sendmail
+Requires:	/bin/mail
 Requires:	crondaemon
 Requires:	lockfile-progs
 Requires:	logtail = %{version}-%{release}
+Requires:	mktemp
+#Suggests:	/usr/bin/syslog-summary
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -82,7 +84,7 @@ mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail
 cat <<'EOF'> $RPM_BUILD_ROOT%{_sysconfdir}/header.txt
 This email is sent by logcheck. If you wish to no-longer receive it,
 you can either deinstall the logcheck package or modify its
-configuration file (/etc/logcheck/logcheck.conf).
+configuration file (%{_sysconfdir}/logcheck.conf).
 EOF
 
 %clean
