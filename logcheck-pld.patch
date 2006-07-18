@@ -1,0 +1,8 @@
+--- logcheck-1.2.46/etc/logcheck.logfiles~	2004-04-19 21:22:03.000000000 +0300
++++ logcheck-1.2.46/etc/logcheck.logfiles	2006-07-19 00:33:46.063944582 +0300
+@@ -1,4 +1,4 @@
+ # these files will be checked by logcheck
+ # This has been tuned towards a default syslog install
+ /var/log/syslog
+-/var/log/auth.log
++/var/log/secure
