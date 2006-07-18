@@ -1,0 +1,4 @@
+- updated to 1.1.1,
+- spec adapterized,
+- make spec %{debug} ready and use rpm automation,
+- change permission on executables to 755.
