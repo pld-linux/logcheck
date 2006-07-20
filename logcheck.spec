@@ -1,4 +1,5 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
+Summary(pl):	Wysy³anie anomalii w logach systemowych poczt± do administratora
 Name:		logcheck
 Version:	1.2.46
 Release:	0.7
@@ -42,8 +43,23 @@ regular expression files contain in the database.
 Logcheck was part of the Abacus Project of security tools, but this
 version has been rewritten.
 
+%description -l pl
+logcheck to proste narzêdzie zaprojektowane aby umo¿liwiæ
+administratorowi systemu ogl±danie plików logów tworzonych przez
+maszyny, które ma pod kontrol±.
+
+Wykonuje to poprzez wysy³anie poczt± elektroniczn± do administratora
+podsumowañ plików logów po odfiltrowaniu "zwyk³ych" wpisów.
+
+Zwyk³e wpisy to wpisy pasuj±ce do jednego z wielu za³±czonych plików
+wyra¿eñ regularnych zawartych w bazie danych.
+
+logcheck by³ czê¶ci± projektu Abacus z narzêdziami zwi±zanymi z 
+bezpieczeñstwem, ale ta wersja zosta³a przepisana.
+
 %package database
-Summary:	database of system log rules for the use of log checkers
+Summary:	Database of system log rules for the use of log checkers
+Summary(pl):	Baza danych regu³ loga systemowego do u¿ywania z narzêdziami sprawdzaj±cymi logi
 Group:		Applications/System
 
 %description database
@@ -51,8 +67,14 @@ This database is part of the Logcheck package, but might be used by
 others. It brings a database of regular expressions for matching
 system log entries after various criteria.
 
+%description database -l pl
+Ta baza danych jest czê¶ci± pakietu logcheck, ale mo¿e byæ u¿ywana
+przez inne programy. Zawiera wyra¿enia regularne do dopasowywania
+wpisów logów systemowych z u¿yciem ró¿nych kryteriów.
+
 %package -n logtail
 Summary:	Print log file lines that have not been read
+Summary(pl):	Wypisywanie nieprzeczytanych linii pliku loga
 Group:		Applications/System
 
 %description -n logtail
@@ -65,6 +87,19 @@ log file checkers to monitor system events.
 
 This program is mainly used by logcheck, because it returns only parts
 of the system logfiles that have not already been checked.
+
+%description -n logtail -l pl
+Ten program czyta standardowy plik tekstowy, a po doczytaniu do koñca
+tworzy znacznik offsetu. Przy nastêpnym uruchomieniu logtaila
+odczytywany jest znacznik offsetu i wska¼nik tekstu jest przesuwany do
+tego offsetu. Pozwala to logtailowi czytaæ kolejne linie danych za
+znacznikiem. Jest to dobre narzêdzie do oznaczania plików logów dla
+narzêdzi do automatycznego sprawdzania plików logów i monitorowania
+zdarzeñ systemowych.
+
+Ten program jest u¿ywany g³ównie przez logcheck, poniewa¿ zwraca tylko
+te czê¶ci plików logów systemowych, które nie zosta³y jeszcze
+przeczytane.
 
 %prep
 %setup -q
