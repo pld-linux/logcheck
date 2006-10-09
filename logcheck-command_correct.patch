@@ -1,0 +1,52 @@
+diff -uNr logcheck-1.2.47.orig/src/logcheck logcheck-1.2.47/src/logcheck
+--- logcheck-1.2.47.orig/src/logcheck	2006-07-06 10:16:42.000000000 +0000
++++ logcheck-1.2.47/src/logcheck	2006-10-08 22:30:26.000000000 +0000
+@@ -23,7 +23,7 @@
+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ 
+ # $Id$
+-
++set -x
+ if [ $UID == 0 ]; then
+     echo "logcheck should not be run as root. Use su to invoke logcheck:"
+     echo "su -s /bin/bash -c \"/usr/sbin/logcheck${@:+ $@}\" logcheck"
+@@ -73,7 +73,7 @@
+ STATEDIR="/var/lib/logcheck"
+ LOGFILES_LIST="/etc/logcheck/logcheck.logfiles"
+ LOGFILE_FALLBACK="/var/log/syslog"
+-LOGTAIL="/usr/sbin/logtail"
++LOGTAIL="/usr/bin/logtail"
+ CAT="/bin/cat"
+ SYSLOG_SUMMARY="/usr/bin/syslog-summary"
+ 
+@@ -205,10 +205,10 @@
+ 
+     if [ -d $dir ]; then 
+         if [ ! -d $cleaned ]; then
+-	    mkdir $cleaned \
++	    install -d -m 755 $cleaned \
+ 	        || error "Could not make dir $cleaned for cleaned rulefiles."
+ 	fi
+-	for rulefile in $(run-parts --list $dir); do
++	for rulefile in $(run-parts -u $dir); do
+ 	    rulefile=$(basename $rulefile)
+ 	    if [ -f ${dir}/${rulefile} ]; then
+ 		debug "cleanrules: ${dir}/${rulefile}"
+@@ -623,7 +623,7 @@
+ 
+ debug "Trying to get lockfile: $LOCKFILE.lock"
+ if [ ! -d $LOCKDIR ]; then 
+-	mkdir -m 0755 $LOCKDIR
++	install -d -m 0755 $LOCKDIR
+ fi
+ lockfile-create --retry 1 $LOCKFILE > /dev/null 2>&1
+ 
+@@ -661,7 +661,7 @@
+ 
+ # Get the list of log files from config file
+ # Handle log rotation correctly, idea taken from Wiktor Niesiobedzki.
+-mkdir $TMPDIR/logoutput \
++install -d -m 755  $TMPDIR/logoutput \
+     || error "Could not mkdir for log files"
+ if [ ! $LOGFILE ] && [ -r $LOGFILES_LIST ]; then
+     for file in $(egrep --text -v "(^#|^[[:space:]]*$)" $LOGFILES_LIST); do
