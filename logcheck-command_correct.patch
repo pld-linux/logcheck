@@ -1,15 +1,5 @@
-diff -uNr logcheck-1.2.47.orig/src/logcheck logcheck-1.2.47/src/logcheck
 --- logcheck-1.2.47.orig/src/logcheck	2006-07-06 10:16:42.000000000 +0000
 +++ logcheck-1.2.47/src/logcheck	2006-10-08 22:30:26.000000000 +0000
-@@ -23,7 +23,7 @@
- # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
- # $Id$
--
-+set -x
- if [ $UID == 0 ]; then
-     echo "logcheck should not be run as root. Use su to invoke logcheck:"
-     echo "su -s /bin/bash -c \"/usr/sbin/logcheck${@:+ $@}\" logcheck"
 @@ -73,7 +73,7 @@
  STATEDIR="/var/lib/logcheck"
  LOGFILES_LIST="/etc/logcheck/logcheck.logfiles"
