@@ -8,6 +8,7 @@ Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
 # Source0-md5:	bc26d3ebe3c4f65813299e829cd01c81
 Patch0:		%{name}-pld.patch
+Patch1:		%{name}-command_correct.patch
 Source1:	%{name}.cron
 URL:		http://logcheck.alioth.debian.org/
 BuildRequires:	rpmbuild(macros) >= 1.202
@@ -104,6 +105,7 @@ przeczytane.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
