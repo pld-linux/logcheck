@@ -6,14 +6,3 @@
  /var/log/syslog
 -/var/log/auth.log
 +/var/log/secure
---- logcheck-1.2.46/src/logcheck~	2006-07-06 13:16:42.000000000 +0300
-+++ logcheck-1.2.46/src/logcheck	2006-07-19 00:37:19.788754840 +0300
-@@ -73,7 +73,7 @@
- STATEDIR="/var/lib/logcheck"
- LOGFILES_LIST="/etc/logcheck/logcheck.logfiles"
- LOGFILE_FALLBACK="/var/log/syslog"
--LOGTAIL="/usr/sbin/logtail"
-+LOGTAIL="/usr/bin/logtail"
- CAT="/bin/cat"
- SYSLOG_SUMMARY="/usr/bin/syslog-summary"
- 
