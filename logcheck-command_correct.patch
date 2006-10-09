@@ -14,7 +14,7 @@
      if [ -d $dir ]; then 
          if [ ! -d $cleaned ]; then
 -	    mkdir $cleaned \
-+	    install -d -m 755 $cleaned \
++	    install -d $cleaned \
  	        || error "Could not make dir $cleaned for cleaned rulefiles."
  	fi
 -	for rulefile in $(run-parts --list $dir); do
@@ -36,7 +36,7 @@
  # Get the list of log files from config file
  # Handle log rotation correctly, idea taken from Wiktor Niesiobedzki.
 -mkdir $TMPDIR/logoutput \
-+install -d -m 755  $TMPDIR/logoutput \
++install -d $TMPDIR/logoutput \
      || error "Could not mkdir for log files"
  if [ ! $LOGFILE ] && [ -r $LOGFILES_LIST ]; then
      for file in $(egrep --text -v "(^#|^[[:space:]]*$)" $LOGFILES_LIST); do
