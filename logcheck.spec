@@ -1,5 +1,5 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
-Summary(pl):	Wysy³anie anomalii w logach systemowych poczt± do administratora
+Summary(pl.UTF-8):   WysyÅ‚anie anomalii w logach systemowych pocztÄ… do administratora
 Name:		logcheck
 Version:	1.2.47
 Release:	0.1
@@ -44,23 +44,23 @@ regular expression files contain in the database.
 Logcheck was part of the Abacus Project of security tools, but this
 version has been rewritten.
 
-%description -l pl
-logcheck to proste narzêdzie zaprojektowane aby umo¿liwiæ
-administratorowi systemu ogl±danie plików logów tworzonych przez
-maszyny, które ma pod kontrol±.
+%description -l pl.UTF-8
+logcheck to proste narzÄ™dzie zaprojektowane aby umoÅ¼liwiÄ‡
+administratorowi systemu oglÄ…danie plikÃ³w logÃ³w tworzonych przez
+maszyny, ktÃ³re ma pod kontrolÄ….
 
-Wykonuje to poprzez wysy³anie poczt± elektroniczn± do administratora
-podsumowañ plików logów po odfiltrowaniu "zwyk³ych" wpisów.
+Wykonuje to poprzez wysyÅ‚anie pocztÄ… elektronicznÄ… do administratora
+podsumowaÅ„ plikÃ³w logÃ³w po odfiltrowaniu "zwykÅ‚ych" wpisÃ³w.
 
-Zwyk³e wpisy to wpisy pasuj±ce do jednego z wielu za³±czonych plików
-wyra¿eñ regularnych zawartych w bazie danych.
+ZwykÅ‚e wpisy to wpisy pasujÄ…ce do jednego z wielu zaÅ‚Ä…czonych plikÃ³w
+wyraÅ¼eÅ„ regularnych zawartych w bazie danych.
 
-logcheck by³ czê¶ci± projektu Abacus z narzêdziami zwi±zanymi z 
-bezpieczeñstwem, ale ta wersja zosta³a przepisana.
+logcheck byÅ‚ czÄ™Å›ciÄ… projektu Abacus z narzÄ™dziami zwiÄ…zanymi z 
+bezpieczeÅ„stwem, ale ta wersja zostaÅ‚a przepisana.
 
 %package database
 Summary:	Database of system log rules for the use of log checkers
-Summary(pl):	Baza danych regu³ loga systemowego do u¿ywania z narzêdziami sprawdzaj±cymi logi
+Summary(pl.UTF-8):   Baza danych reguÅ‚ loga systemowego do uÅ¼ywania z narzÄ™dziami sprawdzajÄ…cymi logi
 Group:		Applications/System
 
 %description database
@@ -68,14 +68,14 @@ This database is part of the Logcheck package, but might be used by
 others. It brings a database of regular expressions for matching
 system log entries after various criteria.
 
-%description database -l pl
-Ta baza danych jest czê¶ci± pakietu logcheck, ale mo¿e byæ u¿ywana
-przez inne programy. Zawiera wyra¿enia regularne do dopasowywania
-wpisów logów systemowych z u¿yciem ró¿nych kryteriów.
+%description database -l pl.UTF-8
+Ta baza danych jest czÄ™Å›ciÄ… pakietu logcheck, ale moÅ¼e byÄ‡ uÅ¼ywana
+przez inne programy. Zawiera wyraÅ¼enia regularne do dopasowywania
+wpisÃ³w logÃ³w systemowych z uÅ¼yciem rÃ³Å¼nych kryteriÃ³w.
 
 %package -n logtail
 Summary:	Print log file lines that have not been read
-Summary(pl):	Wypisywanie nieprzeczytanych linii pliku loga
+Summary(pl.UTF-8):   Wypisywanie nieprzeczytanych linii pliku loga
 Group:		Applications/System
 
 %description -n logtail
@@ -89,17 +89,17 @@ log file checkers to monitor system events.
 This program is mainly used by logcheck, because it returns only parts
 of the system logfiles that have not already been checked.
 
-%description -n logtail -l pl
-Ten program czyta standardowy plik tekstowy, a po doczytaniu do koñca
-tworzy znacznik offsetu. Przy nastêpnym uruchomieniu logtaila
-odczytywany jest znacznik offsetu i wska¼nik tekstu jest przesuwany do
-tego offsetu. Pozwala to logtailowi czytaæ kolejne linie danych za
-znacznikiem. Jest to dobre narzêdzie do oznaczania plików logów dla
-narzêdzi do automatycznego sprawdzania plików logów i monitorowania
-zdarzeñ systemowych.
+%description -n logtail -l pl.UTF-8
+Ten program czyta standardowy plik tekstowy, a po doczytaniu do koÅ„ca
+tworzy znacznik offsetu. Przy nastÄ™pnym uruchomieniu logtaila
+odczytywany jest znacznik offsetu i wskaÅºnik tekstu jest przesuwany do
+tego offsetu. Pozwala to logtailowi czytaÄ‡ kolejne linie danych za
+znacznikiem. Jest to dobre narzÄ™dzie do oznaczania plikÃ³w logÃ³w dla
+narzÄ™dzi do automatycznego sprawdzania plikÃ³w logÃ³w i monitorowania
+zdarzeÅ„ systemowych.
 
-Ten program jest u¿ywany g³ównie przez logcheck, poniewa¿ zwraca tylko
-te czê¶ci plików logów systemowych, które nie zosta³y jeszcze
+Ten program jest uÅ¼ywany gÅ‚Ã³wnie przez logcheck, poniewaÅ¼ zwraca tylko
+te czÄ™Å›ci plikÃ³w logÃ³w systemowych, ktÃ³re nie zostaÅ‚y jeszcze
 przeczytane.
 
 %prep
