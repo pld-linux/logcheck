@@ -1,5 +1,5 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
-Summary(pl.UTF-8):   Wysyłanie anomalii w logach systemowych pocztą do administratora
+Summary(pl.UTF-8):	Wysyłanie anomalii w logach systemowych pocztą do administratora
 Name:		logcheck
 Version:	1.2.47
 Release:	0.1
@@ -60,7 +60,7 @@ bezpieczeństwem, ale ta wersja została przepisana.
 
 %package database
 Summary:	Database of system log rules for the use of log checkers
-Summary(pl.UTF-8):   Baza danych reguł loga systemowego do używania z narzędziami sprawdzającymi logi
+Summary(pl.UTF-8):	Baza danych reguł loga systemowego do używania z narzędziami sprawdzającymi logi
 Group:		Applications/System
 
 %description database
@@ -75,7 +75,7 @@ wpisów logów systemowych z użyciem różnych kryteriów.
 
 %package -n logtail
 Summary:	Print log file lines that have not been read
-Summary(pl.UTF-8):   Wypisywanie nieprzeczytanych linii pliku loga
+Summary(pl.UTF-8):	Wypisywanie nieprzeczytanych linii pliku loga
 Group:		Applications/System
 
 %description -n logtail
