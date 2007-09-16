@@ -1,12 +1,12 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
 Summary(pl.UTF-8):	Wysyłanie anomalii w logach systemowych pocztą do administratora
 Name:		logcheck
-Version:	1.2.56
+Version:	1.2.61
 Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-# Source0-md5:	8fb0066cd0f984622dd47fae55201603
+# Source0-md5:	9a8e9f7b131d7a7f499d6e4452033b7e
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-command_correct.patch
 Source1:	%{name}.cron
@@ -117,6 +117,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/cron.d,%{_sbindir},%{_bindir}}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/cron.d/%{name}
 
 mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail
+mv $RPM_BUILD_ROOT{%{_sbindir},%{_bindir}}/logtail2
 
 cat <<'EOF'> $RPM_BUILD_ROOT%{_sysconfdir}/header.txt
 This email is sent by logcheck. If you wish to no-longer receive it,
@@ -168,4 +169,4 @@ fi
 
 %files -n logtail
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/logtail
+%attr(755,root,root) %{_bindir}/logtail*

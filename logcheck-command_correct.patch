@@ -4,8 +4,8 @@
  STATEDIR="/var/lib/logcheck"
  LOGFILES_LIST="/etc/logcheck/logcheck.logfiles"
  LOGFILE_FALLBACK="/var/log/syslog"
--LOGTAIL="/usr/sbin/logtail"
-+LOGTAIL="/usr/bin/logtail"
+-LOGTAIL="/usr/sbin/logtail2"
++LOGTAIL="/usr/bin/logtail2"
  CAT="/bin/cat"
  SYSLOG_SUMMARY="/usr/bin/syslog-summary"
  
