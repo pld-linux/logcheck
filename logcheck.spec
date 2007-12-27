@@ -1,12 +1,12 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
 Summary(pl.UTF-8):	Wysyłanie anomalii w logach systemowych pocztą do administratora
 Name:		logcheck
-Version:	1.2.61
+Version:	1.2.63
 Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-# Source0-md5:	9a8e9f7b131d7a7f499d6e4452033b7e
+# Source0-md5:	356f4cba335ee305fce15766d3440738
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-command_correct.patch
 Source1:	%{name}.cron
