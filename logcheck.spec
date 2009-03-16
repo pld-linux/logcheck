@@ -2,7 +2,7 @@ Summary:	Mails anomalies in the system logfiles to the administrator
 Summary(pl.UTF-8):	Wysyłanie anomalii w logach systemowych pocztą do administratora
 Name:		logcheck
 Version:	1.2.68
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
@@ -77,6 +77,7 @@ wpisów logów systemowych z użyciem różnych kryteriów.
 Summary:	Print log file lines that have not been read
 Summary(pl.UTF-8):	Wypisywanie nieprzeczytanych linii pliku loga
 Group:		Applications/System
+Obsoletes:	retail
 
 %description -n logtail
 This program will read in a standard text file and create an offset
