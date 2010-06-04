@@ -55,7 +55,7 @@ podsumowań plików logów po odfiltrowaniu "zwykłych" wpisów.
 Zwykłe wpisy to wpisy pasujące do jednego z wielu załączonych plików
 wyrażeń regularnych zawartych w bazie danych.
 
-logcheck był częścią projektu Abacus z narzędziami związanymi z 
+logcheck był częścią projektu Abacus z narzędziami związanymi z
 bezpieczeństwem, ale ta wersja została przepisana.
 
 %package database
