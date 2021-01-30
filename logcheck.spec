@@ -1,12 +1,12 @@
 Summary:	Mails anomalies in the system logfiles to the administrator
 Summary(pl.UTF-8):	Wysyłanie anomalii w logach systemowych pocztą do administratora
 Name:		logcheck
-Version:	1.3.15
+Version:	1.3.20
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.gz
-# Source0-md5:	e3f002fddcdc01856c811872f4082a11
+Source0:	http://ftp.debian.org/debian/pool/main/l/logcheck/%{name}_%{version}.tar.xz
+# Source0-md5:	1c6e9a97f9cc485353c25147cb99fb25
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-command_correct.patch
 Source1:	%{name}.cron
@@ -104,9 +104,12 @@ te części plików logów systemowych, które nie zostały jeszcze
 przeczytane.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
+      src/logcheck
 
 %install
 rm -rf $RPM_BUILD_ROOT
