@@ -1,24 +1,25 @@
---- logcheck-1.2.47.orig/src/logcheck	2006-07-06 10:16:42.000000000 +0000
-+++ logcheck-1.2.47/src/logcheck	2006-10-08 22:30:26.000000000 +0000
-@@ -73,7 +73,7 @@
- STATEDIR="/var/lib/logcheck"
+diff -urNp -x '*.orig' logcheck.org/src/logcheck logcheck/src/logcheck
+--- logcheck.org/src/logcheck	2019-03-01 22:42:31.000000000 +0100
++++ logcheck/src/logcheck	2024-04-01 17:57:58.482699080 +0200
+@@ -75,7 +75,7 @@ STATEDIR="/var/lib/logcheck"
  LOGFILES_LIST="/etc/logcheck/logcheck.logfiles"
+ LOGFILES_LIST_D="/etc/logcheck/logcheck.logfiles.d"
  LOGFILE_FALLBACK="/var/log/syslog"
 -LOGTAIL="/usr/sbin/logtail2"
 +LOGTAIL="/usr/bin/logtail2"
  CAT="/bin/cat"
  SYSLOG_SUMMARY="/usr/bin/syslog-summary"
  
-@@ -205,7 +205,7 @@
+@@ -214,7 +214,7 @@ cleanrules() {
  
-     if [ -d $dir ]; then 
+     if [ -d "$dir" ]; then
          if [ ! -d "$cleaned" ]; then
 -	    mkdir "$cleaned" \
 +	    install -d "$cleaned" \
  	        || error "Could not make dir $cleaned for cleaned rulefiles."
  	fi
  	# run-parts doesn't include files which are not readable. Use this
-@@ -623,7 +623,7 @@
+@@ -633,7 +633,7 @@ trap 'cleanup' 0
  
  debug "Trying to get lockfile: $LOCKFILE.lock"
  if [ ! -d "$LOCKDIR" ]; then
@@ -27,12 +28,12 @@
  fi
  lockfile-create --retry 1 "$LOCKFILE" > /dev/null 2>&1
  
-@@ -661,7 +661,7 @@
+@@ -676,7 +676,7 @@ fi
  
  # Get the list of log files from config file
  # Handle log rotation correctly, idea taken from Wiktor Niesiobedzki.
 -mkdir "$TMPDIR/logoutput" \
 +install -d "$TMPDIR/logoutput" \
      || error "Could not mkdir for log files"
- if [ ! $LOGFILE ] && [ -r $LOGFILES_LIST ]; then
-     for file in $(egrep --text -v "(^#|^[[:space:]]*$)" $LOGFILES_LIST); do
+ LOGFILES=$(ls -1d "$LOGFILES_LIST" "$LOGFILES_LIST_D"/*.logfiles 2>/dev/null)
+ if [ ! "$LOGFILE" ] && [ -n "$LOGFILES" ]; then
